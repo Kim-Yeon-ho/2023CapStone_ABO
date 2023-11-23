@@ -26,6 +26,7 @@ danigoIotDatas.append(danigoIot5)
 
 #시작일 기준 행 추출하기
 dataNow = 20230309
+tempAvg = []
 n = []
 for date in range(5):
     temp = danigoApp[danigoApp['시작일'] == dataNow]
@@ -41,9 +42,14 @@ for date in range(5):
     start = list(temp['시작 시간'])
     stop = list(temp['종료시간'])
 
-    for i in range(len(start)):
+    for i in range(len(temp)):
         n.append(danigoIotDatas[date][(danigoIotDatas[date]['등록시간'] <= stop[i]) & (danigoIotDatas[date]['등록시간'] >= start[i])])
+        
     dataNow += 1
+
+#평균온도계산
+#for i in range(len(n)):
+#    tempAvg.append(sum(n[i]['온도(°C)'])/len(n[i]['온도(°C)']))
 
 
 #n[0] = 첫번째 구간 전체 데이터, 인덱스로 접근
