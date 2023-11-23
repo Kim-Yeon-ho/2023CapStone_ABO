@@ -16,8 +16,16 @@ danigoIot3 = pd.read_csv("", encoding = 'UTF-8')
 danigoIot4 = pd.read_csv("", encoding = 'UTF-8')
 danigoIot5 = pd.read_csv("", encoding = 'UTF-8')
 
+#iot 데이터 합치기
+danigoIotDatas = []
+danigoIotDatas.append(danigoIot1)
+danigoIotDatas.append(danigoIot2)
+danigoIotDatas.append(danigoIot3)
+danigoIotDatas.append(danigoIot4)
+danigoIotDatas.append(danigoIot5)
+
+#시작일 기준 행 추출하기
 dataNow = 20230309
-#tempAvg = []
 n = []
 for date in range(5):
     temp = danigoApp[danigoApp['시작일'] == dataNow]
@@ -34,9 +42,9 @@ for date in range(5):
     stop = list(temp['종료시간'])
 
     for i in range(len(start)):
-        n.append(danigoIot1[(danigoIot1['등록시간'] <= stop[i]) & (danigoIot1['등록시간'] >= start[i])])
-        #tempAvg.append(sum(n['온도(°C)'])/len(n['온도(°C)']))
+        n.append(danigoIotDatas[date][(danigoIotDatas[date]['등록시간'] <= stop[i]) & (danigoIotDatas[date]['등록시간'] >= start[i])])
     dataNow += 1
+
 
 #n[0] = 첫번째 구간 전체 데이터, 인덱스로 접근
 
